@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 # To Do:
-# - Test offsets for branches
+# - Calculate proper offsets for branches
 # - Add common pseudo instructions
 # - Add support for floating-point extension
 # - Add support for compressed extensions
@@ -265,7 +265,7 @@ while True:
             elif imm == 0x1:
                 mnem = "ebreak"
             else:
-                mnem = "???"
+                mnem = ".word  ${0:08x} ; ???".format(instruction)
 
 # RV32M Multiply Extensions
 
@@ -330,7 +330,7 @@ while True:
 
 
         else:
-            mnem = "???"
+            mnem = ".word  ${0:08x} ; ???".format(instruction)
 
 # Output line of disassembly
 
