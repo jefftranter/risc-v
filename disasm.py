@@ -16,7 +16,6 @@
 # limitations under the License.
 #
 # To Do:
-# - Implement -n option
 # - Test offsets for branches
 # - Add common pseudo instructions
 # - Add support for floating-point extension
@@ -333,7 +332,13 @@ while True:
         else:
             mnem = "???"
 
-        print("{0:08x}  {1:08x}  {2:s}".format(address, instruction, mnem))
+# Output line of disassembly
+
+        if args.nolist:
+            print(" {0:s}".format(mnem))
+        else:
+            print("{0:08x}  {1:08x}  {2:s}".format(address, instruction, mnem))
+
         address += 1
     else:
         break
