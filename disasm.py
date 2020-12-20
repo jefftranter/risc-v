@@ -299,34 +299,34 @@ while True:
             mnem = "lr.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,))
 
         elif opcode == 0b0101111 and funct3 == 0x2 and funct5 == 0x03:
-            mnem = "sc.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
+            mnem = "sc.w {0:s},{1:s},{2:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
 
         elif opcode == 0b0101111 and funct3 == 0x2 and funct5 == 0x01:
-            mnem = "amoswap.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
+            mnem = "amoswap.w {0:s},{1:s},{2:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
 
         elif opcode == 0b0101111 and funct3 == 0x2 and funct5 == 0x00:
-            mnem = "amoadd.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
+            mnem = "amoadd.w {0:s},{1:s},{2:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
 
         elif opcode == 0b0101111 and funct3 == 0x2 and funct5 == 0x0c:
-            mnem = "amoand.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
+            mnem = "amoand.w {0:s},{1:s},{2:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
 
         elif opcode == 0b0101111 and funct3 == 0x2 and funct5 == 0x0a:
-            mnem = "amoor.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
+            mnem = "amoor.w {0:s},{1:s},{2:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
 
         elif opcode == 0b0101111 and funct3 == 0x2 and funct5 == 0x04:
-            mnem = "amoxor.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
+            mnem = "amoxor.w {0:s},{1:s},{2:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
 
         elif opcode == 0b0101111 and funct3 == 0x2 and funct5 == 0x14:
-            mnem = "amomax.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
+            mnem = "amomax.w {0:s},{1:s},{2:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
 
         elif opcode == 0b0101111 and funct3 == 0x2 and funct5 == 0x10:
-            mnem = "amomin.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
+            mnem = "amomin.w {0:s},{1:s},{2:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
 
         elif opcode == 0b0101111 and funct3 == 0x2 and funct5 == 0x1c:
-            mnem = "amomaxu.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
+            mnem = "amomaxu.w {0:s},{1:s},{2:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
 
         elif opcode == 0b0101111 and funct3 == 0x2 and funct5 == 0x18:
-            mnem = "amominu.w {0:s},{1:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
+            mnem = "amominu.w {0:s},{1:s},{2:s}".format(registerName(rd), registerName(rs1,), registerName(rs2))
 
 
         else:
