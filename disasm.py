@@ -16,10 +16,11 @@
 # limitations under the License.
 #
 # To Do:
+# - Implement -n option
+# - Test offsets for branches
 # - Add common pseudo instructions
 # - Add support for floating-point extension
 # - Add support for compressed extensions
-
 
 import sys
 import argparse
@@ -131,132 +132,132 @@ while True:
 
         elif opcode == 0b0010011 and funct3 == 0x0:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "addi {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "addi {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0010011 and funct3 == 0x4:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "xori {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "xori {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0010011 and funct3 == 0x6:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "ori {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "ori {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0010011 and funct3 == 0x7:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "andi {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "andi {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0010011 and funct3 == 0x1:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "slli {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "slli {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0010011 and funct3 == 0x5:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "srli {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "srli {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0010011 and funct3 == 0x5:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "srai {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "srai {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0010011 and funct3 == 0x2:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "slti {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "slti {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0010011 and funct3 == 0x3:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "sltiu {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "sltiu {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0000011 and funct3 == 0x0:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "lb {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "lb {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0000011 and funct3 == 0x1:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "lh {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "lh {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0000011 and funct3 == 0x2:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "lw {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "lw {0:s},{2:08x}({1:s})".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0000011 and funct3 == 0x4:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "lbu {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "lbu {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0000011 and funct3 == 0x5:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "lhu {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "lhu {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0100011 and funct3 == 0x0:
             imm = (instruction >> 20) & 0b1111111 + (instruction >> 7) & 0b11111
-            mnem = "sb {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "sb {0:s},{2:08x}({1:s})".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0100011 and funct3 == 0x1:
             imm = (instruction >> 20) & 0b1111111 + (instruction >> 7) & 0b11111
-            mnem = "sh {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "sh {0:s},{1:s},#${2:08x}".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0100011 and funct3 == 0x2:
             imm = (instruction >> 20) & 0b1111111 + (instruction >> 7) & 0b11111
-            mnem = "sw {0:s},{1:s},#${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "sw {0:s},{2:08x}({1:s})".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b1100011 and funct3 == 0x0:
             imm = (((instruction >> 31) & 0b1) << 12) + \
                 (((instruction >> 25) & 0b111111) << 10) + \
                 (((instruction >> 7) & 0b1) << 11) + \
                 (((instruction >> 8) & 0b1111) << 1)
-            mnem = "beq {0:s},{1:s},*+${2:08X}".format(registerName(rs1), registerName(rs2,), imm)
+            mnem = "beq {0:s},{1:s},*+${2:08x}".format(registerName(rs1), registerName(rs2,), imm)
 
         elif opcode == 0b1100011 and funct3 == 0x1:
             imm = (((instruction >> 31) & 0b1) << 12) + \
                 (((instruction >> 25) & 0b111111) << 10) + \
                 (((instruction >> 7) & 0b1) << 11) + \
                 (((instruction >> 8) & 0b1111) << 1)
-            mnem = "bne {0:s},{1:s},*+${2:08X}".format(registerName(rs1), registerName(rs2,), imm)
+            mnem = "bne {0:s},{1:s},*+${2:08x}".format(registerName(rs1), registerName(rs2,), imm)
 
         elif opcode == 0b1100011 and funct3 == 0x4:
             imm = (((instruction >> 31) & 0b1) << 12) + \
                 (((instruction >> 25) & 0b111111) << 10) + \
                 (((instruction >> 7) & 0b1) << 11) + \
                 (((instruction >> 8) & 0b1111) << 1)
-            mnem = "blt {0:s},{1:s},*+${2:08X}".format(registerName(rs1), registerName(rs2,), imm)
+            mnem = "blt {0:s},{1:s},*+${2:08x}".format(registerName(rs1), registerName(rs2,), imm)
 
         elif opcode == 0b1100011 and funct3 == 0x5:
             imm = (((instruction >> 31) & 0b1) << 12) + \
                 (((instruction >> 25) & 0b111111) << 10) + \
                 (((instruction >> 7) & 0b1) << 11) + \
                 (((instruction >> 8) & 0b1111) << 1)
-            mnem = "bge {0:s},{1:s},*+${2:08X}".format(registerName(rs1), registerName(rs2,), imm)
+            mnem = "bge {0:s},{1:s},*+${2:08x}".format(registerName(rs1), registerName(rs2,), imm)
 
         elif opcode == 0b1100011 and funct3 == 0x6:
             imm = (((instruction >> 31) & 0b1) << 12) + \
                 (((instruction >> 25) & 0b111111) << 10) + \
                 (((instruction >> 7) & 0b1) << 11) + \
                 (((instruction >> 8) & 0b1111) << 1)
-            mnem = "bltu {0:s},{1:s},*+${2:08X}".format(registerName(rs1), registerName(rs2,), imm)
+            mnem = "bltu {0:s},{1:s},*+${2:08x}".format(registerName(rs1), registerName(rs2,), imm)
 
         elif opcode == 0b1100011 and funct3 == 0x7:
             imm = (((instruction >> 31) & 0b1) << 12) + \
                 (((instruction >> 25) & 0b111111) << 10) + \
                 (((instruction >> 7) & 0b1) << 11) + \
                 (((instruction >> 8) & 0b1111) << 1)
-            mnem = "bgeu {0:s},{1:s},*+${2:08X}".format(registerName(rs1), registerName(rs2,), imm)
+            mnem = "bgeu {0:s},{1:s},*+${2:08x}".format(registerName(rs1), registerName(rs2,), imm)
             
         elif opcode == 0b1101111:
             imm = (((instruction >> 31) & 0b1) << 20) + \
                 (((instruction >> 30) & 0b1111111111) << 1) + \
                 (((instruction >> 20) & 0b1) << 11) + \
                 (((instruction >> 19) & 0b11111111) << 12)
-            mnem = "jal {0:s},{1:s},*+${2:08X}".format(registerName(rs1), registerName(rs2,), imm)
+            mnem = "jal {0:s},{1:s},*+${2:08x}".format(registerName(rs1), registerName(rs2,), imm)
 
         elif opcode == 0b1100111 and funct3 == 0x0:
             imm = (instruction >> 20) & 0b111111111111
-            mnem = "jalr {0:s},{1:s},*+${2:08X}".format(registerName(rd), registerName(rs1,), imm)
+            mnem = "jalr {0:s},{2:08x}({1:s})".format(registerName(rd), registerName(rs1,), imm)
 
         elif opcode == 0b0110111:
             imm = (instruction >> 12) & 0b11111111111111111111
-            mnem = "lui {0:s},#${1:08X}".format(registerName(rd), imm)
+            mnem = "lui {0:s},#${1:08x}".format(registerName(rd), imm)
 
         elif opcode == 0b0010111:
             imm = (instruction >> 12) & 0b11111111111111111111
-            mnem = "auipc {0:s},*+${1:08X}".format(registerName(rd), imm)
+            mnem = "auipc {0:s},*+${1:08x}".format(registerName(rd), imm)
 
         elif opcode == 0b1110011 and funct3 == 0x0:
             imm = (instruction >> 20) & 0b111111111111
@@ -332,7 +333,7 @@ while True:
         else:
             mnem = "???"
 
-        print("{0:08X}  {1:08X}  {2:s}".format(address, instruction, mnem))
+        print("{0:08x}  {1:08x}  {2:s}".format(address, instruction, mnem))
         address += 1
     else:
         break
