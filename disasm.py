@@ -29,34 +29,34 @@ import argparse
 
 def registerName(regNo):
     "Return register name given a number from 0-31."
-    assert (regNo >= 0 and regNo <= 31)
+    assert 0 <= regNo <= 31
 
-    if args.abinames == False:
-        return "x{0:d}".format(regNo)
-
+    if not args.abinames:
+        s = "x{0:d}".format(regNo)
     if regNo == 0:
-        return "zero"
+        s = "zero"
     elif regNo == 1:
-        return "ra"
+        s = "ra"
     elif regNo == 2:
-        return "sp"
+        s = "sp"
     elif regNo == 3:
-        return "gp"
+        s = "gp"
     elif regNo == 4:
-        return "tp"
-    elif regNo >= 5 and regNo <= 7:
-        return "t{0:d}".format(regNo-5)
+        s = "tp"
+    elif 5 <= regNo <= 7:
+        s = "t{0:d}".format(regNo-5)
     elif regNo == 8:
-        return "fp"
+        s = "fp"
     elif regNo == 9:
-        return "s1"
-    elif regNo >= 10 and regNo <= 17:
-        return "a{0:d}".format(regNo-10)
-    elif regNo >= 18 and regNo <= 27:
-        return "s{0:d}".format(regNo-18)
+        s = "s1"
+    elif 10 <= regNo <= 17:
+        s = "a{0:d}".format(regNo-10)
+    elif 18 <= regNo <= 27:
+        s = "s{0:d}".format(regNo-18)
     else:
-        return "t{0:d}".format(regNo-28)
+        s = "t{0:d}".format(regNo-28)
 
+    return s
 
 # Parse command line options
 parser = argparse.ArgumentParser()
@@ -238,7 +238,7 @@ while True:
                 (((instruction >> 7) & 0b1) << 11) + \
                 (((instruction >> 8) & 0b1111) << 1)
             mnem = "bgeu {0:s},{1:s},*+${2:08x}".format(registerName(rs1), registerName(rs2,), imm)
-            
+
         elif opcode == 0b1101111:
             imm = (((instruction >> 31) & 0b1) << 20) + \
                 (((instruction >> 30) & 0b1111111111) << 1) + \
